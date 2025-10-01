@@ -1,0 +1,76 @@
+# Projeto Big Data - Análise do Impacto de Eventos Mundiais no Mercado Financeiro
+# Dependências Python
+
+# Apache Spark e PySpark
+pyspark==3.4.1
+py4j==0.10.9.7
+
+# Yahoo Finance API
+yfinance==0.2.18
+yahoofinance==0.0.7
+
+# Manipulação de dados
+pandas==2.0.3
+numpy==1.24.3
+pyarrow==12.0.1
+
+# Machine Learning
+scikit-learn==1.3.0
+scipy==1.11.1
+
+# Visualização
+matplotlib==3.7.2
+plotly==5.15.0
+seaborn==0.12.2
+dash==2.11.2
+dash-bootstrap-components==1.4.1
+
+# Análise de sentimento e NLP
+textblob==0.17.1
+nltk==3.8.1
+vaderSentiment==3.3.2
+
+# Web scraping e APIs
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.10.0
+
+# Notebooks e desenvolvimento
+jupyter==1.0.0
+jupyterlab==4.0.3
+ipykernel==6.24.0
+
+# Testes
+pytest==7.4.0
+pytest-cov==4.1.0
+
+# Utilitários
+python-dotenv==1.0.0
+tqdm==4.65.0
+schedule==1.2.0
+
+# Delta Lake (para versionamento de dados)
+delta-spark==2.4.0
+
+# Configuração e logging
+pyyaml==6.0
+loguru==0.7.0
+
+# Análise estatística
+statsmodels==0.14.0
+
+# Processamento de datas
+python-dateutil==2.8.2
+
+# Conexão com bancos de dados (opcional)
+sqlalchemy==2.0.19
+psycopg2-binary==2.9.7
+
+# Monitoramento e profiling
+memory-profiler==0.60.0
+
+# Containerização e orquestração
+docker==6.1.3
+
+# Airflow para pipelines (opcional)
+apache-airflow==2.6.3
