@@ -16,7 +16,8 @@ Este projeto implementa uma plataforma completa de análise de Big Data para mer
 
 | Responsável | Área de Atuação | Módulos |
 |-------------|-----------------|---------|
-| **Felipe Martins** | Coordenação e Infraestrutura | Spark, HDFS, Docker |
+| **Felipe Martins** | Coordenação Geral | Gestão do projeto, integração |
+| **Ana Luiza Pazze** | Arquitetura e Infraestrutura | Spark, HDFS, Docker, configurações |
 | **Pedro Silva** | Análise Estatística | Análise exploratória, estatísticas |
 | **Anny Caroline Sousa** | Machine Learning | Modelos preditivos, sentiment analysis |
 | **Ricardo Areas** | Visualização | Dashboards, gráficos interativos |

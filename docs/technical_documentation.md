@@ -1016,6 +1016,19 @@ class AlertManager:
 
 ---
 
+## 👥 Equipe de Desenvolvimento
+
+| Responsável | Área de Atuação | Módulos |
+|-------------|-----------------|---------|
+| **Felipe Martins** | Coordenação Geral | Gestão do projeto, integração |
+| **Ana Luiza Pazze** | Arquitetura e Infraestrutura | Spark, HDFS, Docker, configurações |
+| **Pedro Silva** | Análise Estatística | Análise exploratória, estatísticas |
+| **Anny Caroline Sousa** | Machine Learning | Modelos preditivos, sentiment analysis |
+| **Ricardo Areas** | Visualização | Dashboards, gráficos interativos |
+| **Fabio** | Documentação | README, documentação técnica |
+
+---
+
 **Documentação mantida por: Fabio**  
 **Última atualização: 2024**  
 **Versão: 1.0**
