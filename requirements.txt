@@ -7,7 +7,6 @@ py4j==0.10.9.7
 
 # Yahoo Finance API
 yfinance==0.2.18
-yahoofinance==0.0.7
 
 # Manipulação de dados
 pandas==2.0.3

@@ -1,0 +1,27 @@
+{
+  "titulo": "Relatório Executivo - Análise de Eventos Mundiais",
+  "data_geracao": "2025-10-01 20:24:52",
+  "equipe_responsavel": {
+    "coordenacao": "Felipe Martins",
+    "infraestrutura": "Ana Luiza Pazze",
+    "analise_estatistica": "Pedro Silva",
+    "machine_learning": "Anny Caroline Sousa",
+    "visualizacao": "Ricardo Areas",
+    "gestao_executiva": "Fabio"
+  },
+  "resumo_executivo": {
+    "eventos_analisados": 0,
+    "total_ativos_monitorados": 0,
+    "periodo_analise_total": "2008-2024",
+    "visualizacoes_geradas": 1,
+    "insights_principais": []
+  },
+  "ranking_eventos_por_impacto": [],
+  "recomendacoes_estrategicas": [
+    "Implementar sistema de alertas para eventos geopolíticos",
+    "Diversificar portfólio considerando correlações em períodos de crise",
+    "Monitorar indicadores de volatilidade antes de eventos programados",
+    "Desenvolver estratégias de hedge para eventos de alta severidade"
+  ],
+  "analises_detalhadas": {}
+}

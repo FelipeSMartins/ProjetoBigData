@@ -1,0 +1,110 @@
+{
+  "periodo": "6mo",
+  "data_comparacao": "2025-10-01 20:09:18",
+  "categorias_analisadas": 1,
+  "resumo_categorias": {
+    "fiis": {
+      "nome": "Fundos Imobiliários",
+      "retorno_medio": 9.54,
+      "volatilidade_media": 7.89,
+      "melhor_ativo": "MXRF11.SA",
+      "pior_ativo": "XPML11.SA"
+    }
+  },
+  "ranking_retorno": [
+    [
+      "fiis",
+      {
+        "nome": "Fundos Imobiliários",
+        "retorno_medio": 9.54,
+        "volatilidade_media": 7.89,
+        "melhor_ativo": "MXRF11.SA",
+        "pior_ativo": "XPML11.SA"
+      }
+    ]
+  ],
+  "ranking_volatilidade": [
+    [
+      "fiis",
+      {
+        "nome": "Fundos Imobiliários",
+        "retorno_medio": 9.54,
+        "volatilidade_media": 7.89,
+        "melhor_ativo": "MXRF11.SA",
+        "pior_ativo": "XPML11.SA"
+      }
+    ]
+  ],
+  "analises_detalhadas": {
+    "fiis": {
+      "categoria": "Fundos Imobiliários",
+      "periodo": "6mo",
+      "data_analise": "2025-10-01 20:09:18",
+      "ativos_analisados": 4,
+      "metricas_individuais": {
+        "HGLG11.SA": {
+          "preco_inicial": 147.84,
+          "preco_atual": 159.76,
+          "retorno_total": 8.07,
+          "volatilidade": 10.04,
+          "sharpe_ratio": 0.803
+        },
+        "XPML11.SA": {
+          "preco_inicial": 97.94,
+          "preco_atual": 105.1,
+          "retorno_total": 7.31,
+          "volatilidade": 11.07,
+          "sharpe_ratio": 0.661
+        },
+        "KNRI11.SA": {
+          "preco_inicial": 130.81,
+          "preco_atual": 145.26,
+          "retorno_total": 11.04,
+          "volatilidade": 14.06,
+          "sharpe_ratio": 0.785
+        },
+        "MXRF11.SA": {
+          "preco_inicial": 8.58,
+          "preco_atual": 9.54,
+          "retorno_total": 11.13,
+          "volatilidade": 8.31,
+          "sharpe_ratio": 1.339
+        }
+      },
+      "metricas_categoria": {
+        "retorno_medio": 9.54,
+        "volatilidade_media": 7.89,
+        "melhor_ativo": "MXRF11.SA",
+        "pior_ativo": "XPML11.SA",
+        "ativo_menos_volatil": "MXRF11.SA",
+        "ativo_mais_volatil": "KNRI11.SA"
+      },
+      "correlacao": {
+        "HGLG11.SA": {
+          "HGLG11.SA": 1.0,
+          "XPML11.SA": 0.446,
+          "KNRI11.SA": 0.343,
+          "MXRF11.SA": 0.302
+        },
+        "XPML11.SA": {
+          "HGLG11.SA": 0.446,
+          "XPML11.SA": 1.0,
+          "KNRI11.SA": 0.475,
+          "MXRF11.SA": 0.239
+        },
+        "KNRI11.SA": {
+          "HGLG11.SA": 0.343,
+          "XPML11.SA": 0.475,
+          "KNRI11.SA": 1.0,
+          "MXRF11.SA": 0.293
+        },
+        "MXRF11.SA": {
+          "HGLG11.SA": 0.302,
+          "XPML11.SA": 0.239,
+          "KNRI11.SA": 0.293,
+          "MXRF11.SA": 1.0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-10-01T21:12:19.769487",
+  "total_eventos_analisados": 10,
+  "eventos_processados": [
+    "Colapso do Silicon Valley Bank",
+    "Declaração da Pandemia COVID-19",
+    "Referendo do Brexit",
+    "Eleições Presidenciais EUA 2016",
+    "Eleições Presidenciais EUA 2020",
+    "Invasão da Ucrânia pela Rússia",
+    "Início do Ciclo de Alta do Fed 2022",
+    "Terremoto e Tsunami no Japão",
+    "Falência do Lehman Brothers",
+    "Colapso do Credit Suisse"
+  ],
+  "arquivos_gerados": {
+    "graficos_linha": [
+      "linha_svb_collapse.html",
+      "linha_covid19_pandemia.html",
+      "linha_brexit_referendum.html",
+      "linha_eleicoes_eua_2016.html",
+      "linha_eleicoes_eua_2020.html",
+      "linha_guerra_russia_ucrania.html",
+      "linha_fed_rate_hike_2022.html",
+      "linha_terremoto_japao_2011.html",
+      "linha_lehman_brothers.html",
+      "linha_credit_suisse_collapse.html"
+    ],
+    "graficos_barras": [
+      "barras_svb_collapse.html",
+      "barras_covid19_pandemia.html",
+      "barras_brexit_referendum.html",
+      "barras_eleicoes_eua_2016.html",
+      "barras_eleicoes_eua_2020.html",
+      "barras_guerra_russia_ucrania.html",
+      "barras_fed_rate_hike_2022.html",
+      "barras_terremoto_japao_2011.html",
+      "barras_lehman_brothers.html",
+      "barras_credit_suisse_collapse.html"
+    ],
+    "dashboards_individuais": [
+      "dashboard_svb_collapse.html",
+      "dashboard_covid19_pandemia.html",
+      "dashboard_brexit_referendum.html",
+      "dashboard_eleicoes_eua_2016.html",
+      "dashboard_eleicoes_eua_2020.html",
+      "dashboard_guerra_russia_ucrania.html",
+      "dashboard_fed_rate_hike_2022.html",
+      "dashboard_terremoto_japao_2011.html",
+      "dashboard_lehman_brothers.html",
+      "dashboard_credit_suisse_collapse.html"
+    ],
+    "dashboard_interativo": "seletor_eventos_interativo.html"
+  },
+  "melhorias_implementadas": [
+    "Gráficos de linha separados por evento",
+    "Gráficos de barras individuais por evento",
+    "Dashboard completo para cada evento (2x2 grid)",
+    "Seletor interativo de eventos com dropdown",
+    "Visualizações mais claras e focadas",
+    "Cores diferenciadas por período (antes/durante/depois)",
+    "Tooltips informativos em todos os gráficos"
+  ],
+  "funcionalidades_dashboard": [
+    "Evolução de preços normalizados",
+    "Comparação de retornos por período",
+    "Análise de volatilidade",
+    "Ranking de impactos por ativo",
+    "Filtro interativo para seleção de eventos"
+  ]
+}
