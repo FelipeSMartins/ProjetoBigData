@@ -21,8 +21,8 @@ scipy==1.11.1
 matplotlib==3.7.2
 plotly==5.15.0
 seaborn==0.12.2
-dash==2.11.2
-dash-bootstrap-components==1.4.1
+dash==3.0.4
+dash-bootstrap-components==2.0.3
 
 # Análise de sentimento e NLP
 textblob==0.17.1
@@ -62,7 +62,7 @@ statsmodels==0.14.0
 python-dateutil==2.8.2
 
 # Conexão com bancos de dados (opcional)
-sqlalchemy==2.0.19
+sqlalchemy>=1.4,<2.0
 psycopg2-binary==2.9.7
 
 # Monitoramento e profiling
