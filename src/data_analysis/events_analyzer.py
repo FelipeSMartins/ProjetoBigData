@@ -165,13 +165,39 @@ class EventsAnalyzer:
             }
         }
         
-        # Ativos para análise por categoria de evento
+        # Ativos para análise por categoria de evento com nomes mais claros
         self.event_assets = {
             'Político': ['SPY', 'VIX', 'GLD', 'TLT', 'DXY'],
             'Geopolítico': ['XLE', 'GLD', 'VIX', 'SPY', 'EWZ', 'FXI'],
             'Pandemia': ['SPY', 'QQQ', 'VIX', 'ZOOM', 'NFLX', 'AMZN'],
             'Catástrofe Natural': ['SPY', 'VIX', 'GLD', 'XLU', 'RE'],
             'Econômico': ['SPY', 'QQQ', 'XLF', 'TLT', 'VIX', 'GLD']
+        }
+        
+        # Mapeamento de símbolos para nomes mais claros por categoria
+        self.asset_categories = {
+            # Índices e ETFs
+            'SPY': 'S&P 500 (Mercado Geral)',
+            'QQQ': 'NASDAQ (Tecnologia)',
+            'VIX': 'Volatilidade (Medo)',
+            'XLF': 'Setor Financeiro',
+            'XLE': 'Setor Energia/Petróleo',
+            'XLU': 'Setor Utilidades',
+            'RE': 'Fundos Imobiliários',
+            
+            # Commodities e Moedas
+            'GLD': 'Ouro (Reserva de Valor)',
+            'TLT': 'Títulos do Tesouro (Renda Fixa)',
+            'DXY': 'Dólar Americano',
+            
+            # Ações Individuais
+            'ZOOM': 'Zoom (Tecnologia)',
+            'NFLX': 'Netflix (Streaming)',
+            'AMZN': 'Amazon (E-commerce)',
+            
+            # ETFs Regionais
+            'EWZ': 'Brasil (Mercado Emergente)',
+            'FXI': 'China (Mercado Emergente)'
         }
     
     def get_available_events(self) -> Dict:
@@ -207,13 +233,13 @@ class EventsAnalyzer:
         # Definir períodos de análise (remover timezone para compatibilidade)
         event_date = event_date.tz_localize(None) if event_date.tz is not None else event_date
         
-        # Período de análise: 60 dias antes, durante o evento, e 30 dias depois
-        before_start = event_date - timedelta(days=60)  # 60 dias antes
+        # Período de análise: 90 dias antes, durante o evento, e 90 dias depois
+        before_start = event_date - timedelta(days=90)  # 90 dias antes
         before_end = event_date - timedelta(days=1)
         during_start = event_date
         during_end = event_date + timedelta(days=min(impact_days, 15))  # Período "durante" baseado no impact_period
         after_start = during_end + timedelta(days=1)
-        after_end = event_date + timedelta(days=30)  # 30 dias depois
+        after_end = event_date + timedelta(days=90)  # 90 dias depois
         
         # Selecionar ativos para análise
         assets = custom_assets if custom_assets else self.event_assets.get(event['category'], ['SPY', 'VIX', 'GLD'])

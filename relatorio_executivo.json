@@ -1,22 +1,22 @@
 {
-  "data_coleta": "2025-10-01 20:03:19",
+  "data_coleta": "2025-10-01 22:29:53",
   "ativos_analisados": 5,
   "periodo_analise": "12 meses",
   "metricas_principais": {
     "AAPL": {
       "preco_atual": 255.4499969482422,
       "retorno_total": 13.16644815713488,
-      "volatilidade": 0.324873726548386
+      "volatilidade": 0.3248737121046564
     },
     "GOOGL": {
       "preco_atual": 244.89999389648438,
       "retorno_total": 48.30579641096588,
-      "volatilidade": 0.32227623489839435
+      "volatilidade": 0.3222762009090155
     },
     "MSFT": {
       "preco_atual": 519.7100219726562,
       "retorno_total": 25.527233518866545,
-      "volatilidade": 0.24676165825623247
+      "volatilidade": 0.24676161538693034
     },
     "TSLA": {
       "preco_atual": 459.4599914550781,
@@ -26,7 +26,7 @@
     "NVDA": {
       "preco_atual": 187.24000549316406,
       "retorno_total": 57.58830691303225,
-      "volatilidade": 0.4964489821573605
+      "volatilidade": 0.49644903622485465
     }
   }
 }

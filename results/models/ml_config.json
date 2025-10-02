@@ -1,0 +1,30 @@
+{
+  "best_model": "Random Forest",
+  "feature_columns": [
+    "event_type_encoded",
+    "event_severity_encoded",
+    "price_mean_before",
+    "price_std_before",
+    "price_trend_before",
+    "volume_mean_before",
+    "volume_std_before",
+    "volatility_before",
+    "rsi_mean_before"
+  ],
+  "model_performance": {
+    "Random Forest": {
+      "test_r2": -1.254816351482038,
+      "test_mse": 6.867873958352328e-05,
+      "cv_mean": NaN,
+      "cv_std": NaN
+    },
+    "Gradient Boosting": {
+      "test_r2": -3.57759507267751,
+      "test_mse": 0.0001394275235358308,
+      "cv_mean": NaN,
+      "cv_std": NaN
+    }
+  },
+  "training_date": "2025-10-01T23:23:19.909330",
+  "n_samples": 11
+}

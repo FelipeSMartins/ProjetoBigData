@@ -1,6 +1,6 @@
 {
   "periodo": "6mo",
-  "data_comparacao": "2025-10-01 20:09:18",
+  "data_comparacao": "2025-10-01 22:30:19",
   "categorias_analisadas": 1,
   "resumo_categorias": {
     "fiis": {
@@ -39,7 +39,7 @@
     "fiis": {
       "categoria": "Fundos Imobiliários",
       "periodo": "6mo",
-      "data_analise": "2025-10-01 20:09:18",
+      "data_analise": "2025-10-01 22:30:19",
       "ativos_analisados": 4,
       "metricas_individuais": {
         "HGLG11.SA": {

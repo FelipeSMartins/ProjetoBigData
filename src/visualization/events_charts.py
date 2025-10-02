@@ -28,29 +28,47 @@ class EventsCharts:
     """
     
     def __init__(self):
-        # Cores por categoria de evento
-        self.event_colors = {
-            'Político': '#FF6B6B',      # Vermelho
-            'Geopolítico': '#4ECDC4',   # Turquesa
-            'Pandemia': '#45B7D1',      # Azul
-            'Catástrofe Natural': '#96CEB4',  # Verde
-            'Econômico': '#FFEAA7'      # Amarelo
-        }
+        """Inicializa o gerador de gráficos de eventos"""
+        # Importar o mapeamento de categorias do EventsAnalyzer
+        from ..data_analysis.events_analyzer import EventsAnalyzer
+        analyzer = EventsAnalyzer()
+        self.asset_categories = analyzer.asset_categories
         
-        # Cores para períodos
+        # Cores para diferentes períodos
         self.period_colors = {
-            'antes': '#95A5A6',         # Cinza
-            'durante': '#E74C3C',       # Vermelho intenso
-            'depois': '#3498DB'         # Azul
+            'antes': '#2E86AB',      # Azul
+            'durante': '#A23B72',    # Roxo
+            'depois': '#F18F01'      # Laranja
         }
         
-        # Configurações padrão (sem title para evitar conflitos)
+        # Cores para diferentes eventos
+        self.event_colors = {
+            'Político': '#FF6B6B',
+            'Geopolítico': '#4ECDC4', 
+            'Pandemia': '#45B7D1',
+            'Catástrofe Natural': '#96CEB4',
+            'Econômico': '#FFEAA7'
+        }
+        
+        # Layout padrão
         self.default_layout = {
             'template': 'plotly_white',
             'font': {'family': 'Arial, sans-serif', 'size': 12},
             'showlegend': True,
             'hovermode': 'x unified'
         }
+    
+    def _get_asset_display_name(self, asset_symbol: str) -> str:
+        """
+        Retorna o nome de exibição categorizado para um símbolo de ativo
+        
+        Args:
+            asset_symbol: Símbolo do ativo (ex: 'SPY', 'QQQ')
+            
+        Returns:
+            Nome categorizado para exibição (ex: 'S&P 500 (Mercado Geral)')
+        """
+        return self.asset_categories.get(asset_symbol, asset_symbol)
     
     def create_event_timeline_chart(self, analysis_data: Dict) -> go.Figure:
         """
@@ -93,7 +111,7 @@ class EventsCharts:
                     x=prices.index,
                     y=normalized_prices,
                     mode='lines',
-                    name=f'{asset}',
+                    name=self._get_asset_display_name(asset),
                     line=dict(width=2, color='#2C3E50'),
                     showlegend=(i == 1)
                 ),
@@ -369,10 +387,10 @@ class EventsCharts:
                         x=prices.index,
                         y=normalized_prices,
                         mode='lines+markers',
-                        name=asset,
+                        name=self._get_asset_display_name(asset),
                         line=dict(width=3, color=colors[i % len(colors)]),
                         marker=dict(size=4),
-                        hovertemplate=f'<b>{asset}</b><br>Data: %{{x}}<br>Preço: %{{y:.2f}}<extra></extra>'
+                        hovertemplate=f'<b>{self._get_asset_display_name(asset)}</b><br>Data: %{{x}}<br>Preço: %{{y:.2f}}<extra></extra>'
                     ),
                     row=1, col=1
                 )
@@ -518,11 +536,11 @@ class EventsCharts:
             print(f"   Range de dados: {df_precos.index.min()} a {df_precos.index.max()}")
             print(f"   Total de registros: {len(df_precos)}")
             
-            # Filtrar dados para mostrar apenas período relevante ao evento (60 dias antes, durante e 30 dias depois)
+            # Filtrar dados para mostrar apenas período relevante ao evento (90 dias antes, durante e 90 dias depois)
             event_date = pd.to_datetime(evento['date'])
             impact_days = evento['impact_period']
-            start_date = event_date - timedelta(days=60)  # 60 dias antes
-            end_date = event_date + timedelta(days=30)    # 30 dias depois
+            start_date = event_date - timedelta(days=90)  # 90 dias antes
+            end_date = event_date + timedelta(days=90)    # 90 dias depois
             df_filtered = df_precos[(df_precos.index >= start_date) & (df_precos.index <= end_date)]
             
             print(f"   Após filtro adicional: {df_filtered.index.min()} a {df_filtered.index.max()} ({len(df_filtered)} registros)")
@@ -539,11 +557,11 @@ class EventsCharts:
                             x=prices.index,
                             y=normalized_prices,
                             mode='lines+markers',
-                            name=f'{asset}',
+                            name=self._get_asset_display_name(asset),
                             line=dict(width=3),
                             marker=dict(size=4),
                             visible=(i == 0),  # Apenas o primeiro evento visível inicialmente
-                            hovertemplate=f'<b>{asset}</b><br>Data: %{{x}}<br>Preço: %{{y:.2f}}<extra></extra>'
+                            hovertemplate=f'<b>{self._get_asset_display_name(asset)}</b><br>Data: %{{x}}<br>Preço: %{{y:.2f}}<extra></extra>'
                         )
                     )
         
@@ -554,11 +572,11 @@ class EventsCharts:
             event_data = events_data[event_name]
             num_assets = len(event_data['dados_precos'].columns)
             
-            # Calcular range de datas para este evento (60 dias antes e 30 dias depois)
+            # Calcular range de datas para este evento (90 dias antes e 90 dias depois)
             event_date = pd.to_datetime(event_data['evento']['date'])
             impact_days = event_data['evento']['impact_period']
-            start_date = event_date - timedelta(days=60)  # 60 dias antes
-            end_date = event_date + timedelta(days=30)    # 30 dias depois
+            start_date = event_date - timedelta(days=90)  # 90 dias antes
+            end_date = event_date + timedelta(days=90)    # 90 dias depois
             
             # Criar lista de visibilidade para este evento
             visibility = [False] * len(fig.data)
@@ -577,7 +595,7 @@ class EventsCharts:
                     args=[
                         {"visible": visibility},
                         {
-                            "title": f"📊 Análise de Evento: {event_name}<br><sub>📅 {event_data['evento']['date']} | Selecione outros eventos no menu</sub>",
+                            "title.text": f"📊 Análise de Evento: {event_name}<br><sub>📅 {event_data['evento']['date']}</sub>",
                             "xaxis.range": [start_date, end_date]
                         }
                     ]
@@ -591,33 +609,35 @@ class EventsCharts:
         first_start_date = first_event_date - timedelta(days=first_impact_days)
         first_end_date = first_event_date + timedelta(days=first_impact_days)
         
-        # Configurar layout com dropdown
+        # Configurar layout com dropdown posicionado no topo direito, fora da área do gráfico
         fig.update_layout(
-            title=f"📊 Análise de Evento: {event_names[0]}<br><sub>📅 {events_data[event_names[0]]['evento']['date']} | Selecione outros eventos no menu</sub>",
+            title=f"📊 Análise de Evento: {event_names[0]}<br><sub>📅 {events_data[event_names[0]]['evento']['date']}</sub>",
             updatemenus=[
                 dict(
                     buttons=dropdown_buttons,
                     direction="down",
                     showactive=True,
-                    x=0.02,
-                    xanchor="left",
+                    x=0.98,
+                    xanchor="right",
                     y=1.15,
                     yanchor="top",
-                    bgcolor="rgba(255,255,255,0.9)",
-                    bordercolor="rgba(0,0,0,0.2)",
-                    borderwidth=1
+                    bgcolor="rgba(255,255,255,0.95)",
+                    bordercolor="rgba(0,0,0,0.3)",
+                    borderwidth=1,
+                    font=dict(size=12)
                 )
             ],
             annotations=[
                 dict(
-                    text="Selecionar Evento:",
-                    x=0.02, xanchor="left",
+                    text="🔽 Selecionar Evento:",
+                    x=0.98, xanchor="right",
                     y=1.18, yanchor="bottom",
                     showarrow=False,
-                    font=dict(size=14, color="black")
+                    font=dict(size=12, color="black", family="Arial")
                 )
             ],
             height=600,
+            margin=dict(t=120, r=50, l=50, b=50),  # Aumentar margem superior para dar espaço ao dropdown
             **self.default_layout
         )
         
@@ -640,9 +660,9 @@ class EventsCharts:
         event_date = pd.to_datetime(evento['date'])
         impact_days = evento['impact_period']
         
-        # Definir janela de visualização (período antes/durante/depois do evento)
-        start_date = event_date - timedelta(days=impact_days)
-        end_date = event_date + timedelta(days=impact_days)
+        # Definir janela de visualização (90 dias antes e depois do evento)
+        start_date = event_date - timedelta(days=90)
+        end_date = event_date + timedelta(days=90)
         
         # Filtrar DataFrame para o período relevante
         df_filtered = df_precos[(df_precos.index >= start_date) & (df_precos.index <= end_date)]
@@ -661,10 +681,10 @@ class EventsCharts:
                         x=prices.index,
                         y=prices,
                         mode='lines+markers',
-                        name=asset,
+                        name=self._get_asset_display_name(asset),
                         line=dict(width=3, color=colors[i % len(colors)]),
                         marker=dict(size=6),
-                        hovertemplate=f'<b>{asset}</b><br>Data: %{{x}}<br>Preço: $%{{y:.2f}}<extra></extra>'
+                        hovertemplate=f'<b>{self._get_asset_display_name(asset)}</b><br>Data: %{{x}}<br>Preço: $%{{y:.2f}}<extra></extra>'
                     )
                 )
         
