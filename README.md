@@ -97,7 +97,7 @@ ProjetoBigData/
 ## 📋 Pré-requisitos
 
 ### Sistema
-- **Docker**: 20.10+
+- **Docker**: 28.4.0+
 - **Docker Compose**: 2.0+
 - **Python**: 3.9+
 - **Git**: Para controle de versão
