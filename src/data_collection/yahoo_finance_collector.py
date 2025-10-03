@@ -221,7 +221,7 @@ class YahooFinanceCollector:
         
         return results
     
-    def save_data(self, data: pd.DataFrame, filename: str, format: str = 'parquet'):
+    def save_data(self, data: pd.DataFrame, filename: str, format: str = 'parquet', hdfs_manager=None, hdfs_subdir: str = "/bigdata/finance/raw"):
         """
         Salva os dados coletados
         
@@ -245,6 +245,15 @@ class YahooFinanceCollector:
                 raise ValueError(f"Formato não suportado: {format}")
             
             logger.info(f"Dados salvos em {filepath}")
+
+            # Se um HDFSManager for fornecido, enviar arquivo para HDFS
+            if hdfs_manager is not None:
+                hdfs_target = os.path.join(hdfs_subdir, f"{filename}.{format}")
+                ok = hdfs_manager.upload_file(str(filepath), hdfs_target)
+                if ok:
+                    logger.info(f"Arquivo enviado ao HDFS: {hdfs_target}")
+                else:
+                    logger.error(f"Falha ao enviar arquivo ao HDFS: {hdfs_target}")
             
         except Exception as e:
             logger.error(f"Erro ao salvar dados: {str(e)}")

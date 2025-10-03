@@ -507,3 +507,49 @@ Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICEN
 ---
 
 **Desenvolvido com ❤️ pela Equipe Big Data Finance**
+### 2. Subir o cluster Hadoop + Spark com Docker
+```bash
+cd docker
+docker-compose up -d
+```
+
+Serviços e UIs:
+- HDFS NameNode: `http://localhost:9870`
+- Spark Master: `http://localhost:8080`
+- Jupyter: `http://localhost:8888` (token padrão `bigdata2024`)
+
+O `docker-compose.yml` já exporta variáveis para os containers:
+- `SPARK_MASTER_URL=spark://spark-master:7077`
+- `HDFS_NAMENODE_URL=hdfs://namenode:9000`
+
+### 3. Executar a pipeline Yahoo -> HDFS -> Spark
+```bash
+# No diretório raiz do projeto
+python pipeline_yahoo_spark.py
+```
+
+O script executa:
+- Criação/validação da estrutura no HDFS (`/bigdata/finance/*`)
+- Coleta de dados do Yahoo Finance (últimos 30 dias)
+- Upload dos dados para `hdfs:///bigdata/finance/raw`
+- Processamento com Spark e gravação em `hdfs:///bigdata/finance/processed/yahoo_daily`
+
+Para coletar em torno de um evento específico:
+```bash
+python pipeline_yahoo_spark.py  # edite o script para passar event_date ou crie um wrapper
+```
+
+### 4. Usar nos Notebooks
+Nos notebooks, inicialize a sessão Spark utilizando `config/spark_config.py` para que o `fs.defaultFS` aponte para `HDFS_NAMENODE_URL`. Exemplo:
+```python
+from config.spark_config import SparkConfig
+spark = SparkConfig.get_spark_session()
+df = spark.read.parquet('/bigdata/finance/processed/yahoo_daily')
+df.show(5)
+```
+
+### 5. Encerrar serviços
+```bash
+cd docker
+docker-compose down
+```

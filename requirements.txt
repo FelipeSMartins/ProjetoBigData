@@ -21,7 +21,7 @@ scipy==1.11.1
 matplotlib==3.7.2
 plotly==5.15.0
 seaborn==0.12.2
-dash==2.11.2
+dash==2.14.2
 dash-bootstrap-components==1.4.1
 
 # Análise de sentimento e NLP
@@ -72,4 +72,4 @@ memory-profiler==0.60.0
 docker==6.1.3
 
 # Airflow para pipelines (opcional)
-apache-airflow==2.6.3
+# apache-airflow==2.6.3

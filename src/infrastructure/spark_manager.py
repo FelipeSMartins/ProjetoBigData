@@ -27,11 +27,8 @@ class SparkManager:
         """
         self.app_name = app_name
         self.spark = None
-        self.hdfs_config = {
-            'host': 'localhost',
-            'port': 9000,
-            'user': 'hadoop'
-        }
+        # URL do HDFS pode ser configurada via variável de ambiente (ex.: hdfs://namenode:9000)
+        self.hdfs_url = os.getenv("HDFS_NAMENODE_URL", "hdfs://localhost:9000")
     
     def create_spark_session(self, 
                            master: str = "local[*]",
@@ -71,7 +68,7 @@ class SparkManager:
             conf.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
             
             # Configurações HDFS
-            conf.set("spark.hadoop.fs.defaultFS", f"hdfs://{self.hdfs_config['host']}:{self.hdfs_config['port']}")
+            conf.set("spark.hadoop.fs.defaultFS", self.hdfs_url)
             
             # Configurações para processamento de dados financeiros
             conf.set("spark.sql.shuffle.partitions", "200")
@@ -223,7 +220,7 @@ class SparkManager:
             mode: Modo de escrita (overwrite, append)
         """
         try:
-            hdfs_path = f"hdfs://{self.hdfs_config['host']}:{self.hdfs_config['port']}{path}"
+            hdfs_path = f"{self.hdfs_url}{path}"
             
             if format == "parquet":
                 df.write.mode(mode).parquet(hdfs_path)

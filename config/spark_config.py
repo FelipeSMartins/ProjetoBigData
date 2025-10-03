@@ -3,6 +3,7 @@
 
 from pyspark.sql import SparkSession
 from pyspark.conf import SparkConf
+import os
 
 class SparkConfig:
     """Configurações centralizadas para Apache Spark"""
@@ -22,7 +23,9 @@ class SparkConfig:
         
         # Configurações básicas
         conf.set("spark.app.name", app_name)
-        conf.set("spark.master", "local[*]")  # Usar todos os cores disponíveis
+        # Permitir trocar entre local e cluster via variável de ambiente
+        spark_master = os.getenv("SPARK_MASTER_URL", "local[*]")
+        conf.set("spark.master", spark_master)
         
         # Configurações de memória
         conf.set("spark.executor.memory", "4g")
@@ -34,7 +37,8 @@ class SparkConfig:
         conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
         
         # Configurações para HDFS (quando disponível)
-        conf.set("spark.hadoop.fs.defaultFS", "hdfs://localhost:9000")
+        hdfs_fs = os.getenv("HDFS_NAMENODE_URL", "hdfs://localhost:9000")
+        conf.set("spark.hadoop.fs.defaultFS", hdfs_fs)
         
         # Configurações para Delta Lake
         conf.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")

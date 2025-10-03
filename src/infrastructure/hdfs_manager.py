@@ -17,8 +17,8 @@ class HDFSManager:
     """
     
     def __init__(self, 
-                 hdfs_host: str = "localhost",
-                 hdfs_port: int = 9000,
+                 hdfs_host: str = None,
+                 hdfs_port: int = None,
                  hdfs_user: str = "hadoop"):
         """
         Inicializa o gerenciador HDFS
@@ -28,8 +28,23 @@ class HDFSManager:
             hdfs_port: Porta do HDFS
             hdfs_user: Usuário HDFS
         """
-        self.hdfs_host = hdfs_host
-        self.hdfs_port = hdfs_port
+        # Permitir configuração via variável de ambiente HDFS_NAMENODE_URL (ex.: hdfs://namenode:9000)
+        env_url = os.getenv("HDFS_NAMENODE_URL")
+        if env_url:
+            # Extrair host e porta se possível
+            try:
+                # hdfs://host:port
+                without_scheme = env_url.replace("hdfs://", "")
+                host_part, port_part = without_scheme.split(":")
+                self.hdfs_host = host_part
+                self.hdfs_port = int(port_part)
+            except Exception:
+                # Fallback
+                self.hdfs_host = hdfs_host or "localhost"
+                self.hdfs_port = hdfs_port or 9000
+        else:
+            self.hdfs_host = hdfs_host or "localhost"
+            self.hdfs_port = hdfs_port or 9000
         self.hdfs_user = hdfs_user
         self.hdfs_url = f"hdfs://{hdfs_host}:{hdfs_port}"
         

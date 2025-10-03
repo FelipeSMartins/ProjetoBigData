@@ -11,7 +11,7 @@ LABEL version="1.0"
 # Variáveis de ambiente
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/default-java
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ENV PYSPARK_PYTHON=python3
@@ -19,7 +19,7 @@ ENV PYSPARK_DRIVER_PYTHON=python3
 
 # Instalar dependências do sistema
 RUN apt-get update && apt-get install -y \
-    openjdk-11-jdk \
+    default-jdk \
     wget \
     curl \
     procps \
@@ -48,9 +48,10 @@ ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 # Criar diretório da aplicação
 WORKDIR /app
 
-# Copiar requirements e instalar dependências Python
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+    # Copiar requirements e instalar dependências Python
+    COPY requirements.txt .
+    RUN python -m pip install --upgrade pip setuptools wheel \
+        && pip install --no-cache-dir -r requirements.txt
 
 # Copiar código da aplicação
 COPY src/ ./src/
@@ -69,6 +70,9 @@ COPY docker/spark/conf/* /opt/spark/conf/
 
 # Configurar PYTHONPATH
 ENV PYTHONPATH=/app/src:$PYTHONPATH
+
+# Garantir PATH com Spark e Hadoop visíveis em runtime
+ENV PATH=/opt/spark/bin:/opt/spark/sbin:/opt/hadoop/bin:/opt/hadoop/sbin:$PATH
 
 # Expor portas
 EXPOSE 4040 4041 4042 4043
